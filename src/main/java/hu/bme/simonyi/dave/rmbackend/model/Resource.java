@@ -3,6 +3,8 @@ package hu.bme.simonyi.dave.rmbackend.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +13,10 @@ import java.util.Objects;
  * Created by dkiss on 2017. 03. 28..
  */
 
-public class Resource   {
+@Entity
+public class Resource implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty("resourceID")
     private Long resourceID = null;
 
@@ -24,14 +29,24 @@ public class Resource   {
     @JsonProperty("active")
     private Boolean active = null;
 
+    @JsonProperty("archived")
+    private Boolean archived = null;
+
+    @ManyToOne
     @JsonProperty("resourceType")
     private ResourceType resourceType = null;
 
+    @OneToMany(mappedBy = "resource", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JsonProperty("resourceFaults")
-    private List<ResourceFault> resourceFaults = new ArrayList<ResourceFault>();
+    private List<ResourceFault> resourceFaults = null;
 
+    @OneToMany(mappedBy = "resource", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     @JsonProperty("requests")
-    private List<Request> requests = new ArrayList<Request>();
+    private List<Request> requests = null;
+
+    public Resource() {
+
+    }
 
     public Resource resourceID(Long resourceID) {
         this.resourceID = resourceID;
@@ -40,6 +55,7 @@ public class Resource   {
 
     /**
      * Get resourceID
+     *
      * @return resourceID
      **/
     @ApiModelProperty(value = "")
@@ -58,6 +74,7 @@ public class Resource   {
 
     /**
      * Get resourceName
+     *
      * @return resourceName
      **/
     @ApiModelProperty(value = "")
@@ -76,6 +93,7 @@ public class Resource   {
 
     /**
      * Get resourceDescription
+     *
      * @return resourceDescription
      **/
     @ApiModelProperty(value = "")
@@ -94,6 +112,7 @@ public class Resource   {
 
     /**
      * Get active
+     *
      * @return active
      **/
     @ApiModelProperty(value = "")
@@ -105,6 +124,25 @@ public class Resource   {
         this.active = active;
     }
 
+    public Resource archived(Boolean archived) {
+        this.archived = archived;
+        return this;
+    }
+
+    /**
+     * Get archived
+     *
+     * @return archived
+     **/
+    @ApiModelProperty(value = "")
+    public Boolean getArchived() {
+        return archived;
+    }
+
+    public void setArchived(Boolean archived) {
+        this.archived = archived;
+    }
+
     public Resource resourceType(ResourceType resourceType) {
         this.resourceType = resourceType;
         return this;
@@ -112,6 +150,7 @@ public class Resource   {
 
     /**
      * Get resourceType
+     *
      * @return resourceType
      **/
     @ApiModelProperty(value = "")
@@ -135,6 +174,7 @@ public class Resource   {
 
     /**
      * Get resourceFaults
+     *
      * @return resourceFaults
      **/
     @ApiModelProperty(value = "")
@@ -158,6 +198,7 @@ public class Resource   {
 
     /**
      * Get requests
+     *
      * @return requests
      **/
     @ApiModelProperty(value = "")

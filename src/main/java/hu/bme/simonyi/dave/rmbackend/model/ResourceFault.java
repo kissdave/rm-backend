@@ -3,12 +3,17 @@ package hu.bme.simonyi.dave.rmbackend.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Created by dkiss on 2017. 03. 28..
  */
-public class ResourceFault   {
+@Entity
+public class ResourceFault implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty("resourceFaultID")
     private Long resourceFaultID = null;
 
@@ -21,8 +26,12 @@ public class ResourceFault   {
     @JsonProperty("active")
     private Boolean active = null;
 
+    @ManyToOne
     @JsonProperty("resource")
     private Resource resource = null;
+
+    public ResourceFault() {
+    }
 
     public ResourceFault resourceFaultID(Long resourceFaultID) {
         this.resourceFaultID = resourceFaultID;

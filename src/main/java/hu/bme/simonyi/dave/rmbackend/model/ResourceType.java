@@ -3,6 +3,8 @@ package hu.bme.simonyi.dave.rmbackend.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +12,10 @@ import java.util.Objects;
 /**
  * Created by dkiss on 2017. 03. 28..
  */
-public class ResourceType   {
+@Entity
+public class ResourceType implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty("resourceTypeID")
     private Long resourceTypeID = null;
 
@@ -20,8 +25,12 @@ public class ResourceType   {
     @JsonProperty("description")
     private String description = null;
 
+    @OneToMany(mappedBy = "resourceType", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JsonProperty("resources")
-    private List<Resource> resources = new ArrayList<Resource>();
+    private List<Resource> resources = null;
+
+    public ResourceType() {
+    }
 
     public ResourceType resourceTypeID(Long resourceTypeID) {
         this.resourceTypeID = resourceTypeID;
