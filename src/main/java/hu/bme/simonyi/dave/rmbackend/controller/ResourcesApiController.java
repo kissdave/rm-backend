@@ -19,7 +19,7 @@ public class ResourcesApiController implements ResourcesApi {
     ResourceRepository resourceRepository;
 
     public ResponseEntity<List<Resource>> resourcesGet() {
-        return new ResponseEntity<List<Resource>>(resourceRepository.findAll(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<List<Resource>>(resourceRepository.findAll(), HttpStatus.OK);
     }
 
 }
