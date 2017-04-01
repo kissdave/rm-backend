@@ -36,11 +36,11 @@ public class Resource implements Serializable {
     @JsonProperty("resourceType")
     private ResourceType resourceType = null;
 
-    @OneToMany(mappedBy = "resource", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "resource", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JsonProperty("resourceFaults")
     private List<ResourceFault> resourceFaults = null;
 
-    @OneToMany(mappedBy = "resource", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "resource", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JsonProperty("requests")
     private List<Request> requests = null;
 
