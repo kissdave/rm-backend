@@ -22,9 +22,9 @@ public class ResourceApiController implements ResourceApi {
 
     public ResponseEntity<Integer> resourcePost(@ApiParam(value = "" ,required=true ) @RequestBody Resource body) {
 
-        resourceService.createResource(body);
+        int newId = Math.toIntExact(resourceService.createResource(body));
 
-        return new ResponseEntity<Integer>(HttpStatus.OK);
+        return new ResponseEntity<Integer>(newId, HttpStatus.OK);
     }
 
     public ResponseEntity<Void> resourceResourceIDDelete(@ApiParam(value = "The identifier of the resource to delete",required=true ) @PathVariable("resourceID") Integer resourceID) {
@@ -33,8 +33,12 @@ public class ResourceApiController implements ResourceApi {
     }
 
     public ResponseEntity<Resource> resourceResourceIDGet(@ApiParam(value = "",required=true ) @PathVariable("resourceID") Integer resourceID) {
-        // do some magic!
-        return new ResponseEntity<Resource>(HttpStatus.OK);
+        HttpStatus returnStatus = HttpStatus.OK;
+        Resource resource = resourceService.getResourceById(resourceID);
+        if(resource == null) {
+            returnStatus = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<Resource>(resource, returnStatus);
     }
 
     public ResponseEntity<Integer> resourceResourceIDPut(@ApiParam(value = "The identifier of the resource to modify",required=true ) @PathVariable("resourceID") Integer resourceID,
