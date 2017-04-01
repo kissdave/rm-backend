@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -45,7 +44,7 @@ public class Resource implements Serializable {
     private List<Request> requests = null;
 
     public Resource() {
-
+        // Empty constructor for JPA
     }
 
     public Resource resourceID(Long resourceID) {

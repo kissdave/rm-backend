@@ -30,6 +30,7 @@ public class ResourceType implements Serializable {
     private List<Resource> resources = null;
 
     public ResourceType() {
+        // Empty constructor for JPA
     }
 
     public ResourceType resourceTypeID(Long resourceTypeID) {
@@ -39,6 +40,7 @@ public class ResourceType implements Serializable {
 
     /**
      * Get resourceTypeID
+     *
      * @return resourceTypeID
      **/
     @ApiModelProperty(value = "")
@@ -57,6 +59,7 @@ public class ResourceType implements Serializable {
 
     /**
      * Get name
+     *
      * @return name
      **/
     @ApiModelProperty(value = "")
@@ -75,6 +78,7 @@ public class ResourceType implements Serializable {
 
     /**
      * Get description
+     *
      * @return description
      **/
     @ApiModelProperty(value = "")
@@ -98,6 +102,7 @@ public class ResourceType implements Serializable {
 
     /**
      * Get resources
+     *
      * @return resources
      **/
     @ApiModelProperty(value = "")
@@ -155,7 +160,7 @@ public class ResourceType implements Serializable {
     }
 
     public void addResource(Resource resource) {
-        if(resources == null) {
+        if (resources == null) {
             resources = new ArrayList<>();
         }
 
@@ -164,7 +169,7 @@ public class ResourceType implements Serializable {
     }
 
     public void deleteResource(Resource resource) {
-        if(resources == null) {
+        if (resources == null) {
             resources = new ArrayList<>();
             return;
         }

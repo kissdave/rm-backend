@@ -31,6 +31,7 @@ public class ResourceFault implements Serializable {
     private Resource resource = null;
 
     public ResourceFault() {
+        // Empty constructor for JPA
     }
 
     public ResourceFault resourceFaultID(Long resourceFaultID) {
