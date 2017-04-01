@@ -28,7 +28,7 @@ public class ResourceApiController implements ResourceApi {
     }
 
     public ResponseEntity<Void> resourceResourceIDDelete(@ApiParam(value = "The identifier of the resource to delete",required=true ) @PathVariable("resourceID") Integer resourceID) {
-        // do some magic!
+        //TODO: do some magic!
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
@@ -43,8 +43,12 @@ public class ResourceApiController implements ResourceApi {
 
     public ResponseEntity<Integer> resourceResourceIDPut(@ApiParam(value = "The identifier of the resource to modify",required=true ) @PathVariable("resourceID") Integer resourceID,
                                                          @ApiParam(value = "" ,required=true ) @RequestBody Resource body) {
-        // do some magic!
-        return new ResponseEntity<Integer>(HttpStatus.OK);
+        HttpStatus returnStatus = HttpStatus.OK;
+        Integer response = Math.toIntExact(resourceService.updateResourceById(resourceID, body));
+        if(response == null) {
+            returnStatus = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<Integer>(response, returnStatus);
     }
 
 }

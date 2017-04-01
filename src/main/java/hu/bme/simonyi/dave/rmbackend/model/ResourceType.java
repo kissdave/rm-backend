@@ -153,4 +153,23 @@ public class ResourceType implements Serializable {
         }
         return o.toString().replace("\n", "\n    ");
     }
+
+    public void addResource(Resource resource) {
+        if(resources == null) {
+            resources = new ArrayList<>();
+        }
+
+        resources.add(resource);
+        resource.setResourceType(this);
+    }
+
+    public void deleteResource(Resource resource) {
+        if(resources == null) {
+            resources = new ArrayList<>();
+            return;
+        }
+
+        resources.remove(resource);
+        resource.setResourceType(null);
+    }
 }

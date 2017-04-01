@@ -36,6 +36,7 @@ public class ResourceService {
         if(resource.getResourceType() != null) {
             final ResourceType resourceType = resourceTypeRepository.findOne(resource.getResourceType().getResourceTypeID());
             resource.setResourceType(resourceType);
+            resourceType.addResource(resource);
         }
 
         if(resource.getArchived()) {
@@ -50,6 +51,33 @@ public class ResourceService {
     public Resource getResourceById(Integer resourceID) {
         if (resourceID != null) {
             return resourceRepository.findOne(resourceID.longValue());
+        } else {
+            return null;
+        }
+    }
+
+    @Transactional
+    public Long updateResourceById(Integer resourceID, Resource body) {
+        if(resourceID != null && body != null) {
+            body.setResourceID(resourceID.longValue());
+
+            final Resource resourceOld = resourceRepository.findOne(body.getResourceID());
+
+            // Update ResourceType connection
+            if(body.getResourceType() != null) {
+                ResourceType resourceTypeOld = resourceOld.getResourceType();
+                final ResourceType resourceTypeNew = resourceTypeRepository.findOne(body.getResourceType().getResourceTypeID());
+
+                resourceTypeOld.deleteResource(resourceOld);
+                resourceTypeNew.addResource(body);
+            }
+            if(body.getArchived()) {
+                body.setActive(false);
+            }
+
+            em.merge(body);
+            em.flush();
+            return body.getResourceID();
         } else {
             return null;
         }
