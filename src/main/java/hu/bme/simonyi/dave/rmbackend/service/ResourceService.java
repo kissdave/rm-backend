@@ -82,4 +82,13 @@ public class ResourceService {
             return null;
         }
     }
+
+    @Transactional
+    public void deleteResource(Integer resourceID) {
+        if(resourceID != null) {
+            final Resource resource = resourceRepository.findOne(resourceID.longValue());
+            em.remove(resource);
+            em.flush();
+        }
+    }
 }

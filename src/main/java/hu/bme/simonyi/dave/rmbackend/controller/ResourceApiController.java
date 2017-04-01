@@ -28,7 +28,7 @@ public class ResourceApiController implements ResourceApi {
     }
 
     public ResponseEntity<Void> resourceResourceIDDelete(@ApiParam(value = "The identifier of the resource to delete",required=true ) @PathVariable("resourceID") Integer resourceID) {
-        //TODO: do some magic!
+        resourceService.deleteResource(resourceID);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
