@@ -2,7 +2,9 @@ package hu.bme.simonyi.dave.rmbackend.controller;
 
 
 import hu.bme.simonyi.dave.rmbackend.model.Resource;
+import hu.bme.simonyi.dave.rmbackend.service.ResourceService;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -15,8 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 public class ResourceApiController implements ResourceApi {
 
+    @Autowired
+    ResourceService resourceService;
+
     public ResponseEntity<Integer> resourcePost(@ApiParam(value = "" ,required=true ) @RequestBody Resource body) {
-        // do some magic!
+
+        resourceService.createResource(body);
+
         return new ResponseEntity<Integer>(HttpStatus.OK);
     }
 

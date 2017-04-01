@@ -10,7 +10,7 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="hu.bme.simonyi.dave.rmbackend.controller"/>
+    <context:component-scan base-package="hu.bme.simonyi.dave.rmbackend"/>
 
     <mvc:annotation-driven/>
 
