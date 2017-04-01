@@ -1,7 +1,10 @@
 package hu.bme.simonyi.dave.rmbackend.controller;
 
+import hu.bme.simonyi.dave.rmbackend.model.Resource;
 import hu.bme.simonyi.dave.rmbackend.model.ResourceFault;
+import hu.bme.simonyi.dave.rmbackend.service.ResourceFaultService;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,25 +17,36 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 public class ResourcefaultApiController implements ResourcefaultApi {
 
+    @Autowired
+    ResourceFaultService resourceFaultService;
+
     public ResponseEntity<Integer> resourcefaultPost(@ApiParam(value = "" ,required=true ) @RequestBody ResourceFault body) {
-        // do some magic!
-        return new ResponseEntity<Integer>(HttpStatus.OK);
+        Integer newID = Math.toIntExact(resourceFaultService.createResourceFault(body));
+        return new ResponseEntity<Integer>(newID, HttpStatus.OK);
     }
 
     public ResponseEntity<Void> resourcefaultResourcefaultIDDelete(@ApiParam(value = "The identifier of the resource fault to delete",required=true ) @PathVariable("resourcefaultID") Integer resourcefaultID) {
-        // do some magic!
+        resourceFaultService.deleteResourceFault(resourcefaultID);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     public ResponseEntity<ResourceFault> resourcefaultResourcefaultIDGet(@ApiParam(value = "",required=true ) @PathVariable("resourcefaultID") Integer resourcefaultID) {
-        // do some magic!
-        return new ResponseEntity<ResourceFault>(HttpStatus.OK);
+        HttpStatus returnStatus = HttpStatus.OK;
+        ResourceFault resourceFault = resourceFaultService.getResourceFaultById(resourcefaultID);
+        if(resourceFault == null) {
+            returnStatus = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<ResourceFault>(resourceFault, HttpStatus.OK);
     }
 
     public ResponseEntity<Integer> resourcefaultResourcefaultIDPut(@ApiParam(value = "The identifier of the resource fault to modify",required=true ) @PathVariable("resourcefaultID") Integer resourcefaultID,
                                                                    @ApiParam(value = "" ,required=true ) @RequestBody ResourceFault body) {
-        // do some magic!
-        return new ResponseEntity<Integer>(HttpStatus.OK);
+        HttpStatus returnStatus = HttpStatus.OK;
+        Integer response = Math.toIntExact(resourceFaultService.updateResourceFaultById(resourcefaultID, body));
+        if(response == null) {
+            returnStatus = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<Integer>(response, returnStatus);
     }
 
 }

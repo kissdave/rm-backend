@@ -1,5 +1,6 @@
 package hu.bme.simonyi.dave.rmbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -27,6 +28,7 @@ public class ResourceFault implements Serializable {
     private Boolean active = null;
 
     @ManyToOne
+    @JsonBackReference
     @JsonProperty("resource")
     private Resource resource = null;
 

@@ -23,7 +23,7 @@ public class ResourceApiController implements ResourceApi {
     @Override
     public ResponseEntity<Integer> resourcePost(@ApiParam(value = "" ,required=true ) @RequestBody Resource body) {
 
-        int newId = Math.toIntExact(resourceService.createResource(body));
+        Integer newId = Math.toIntExact(resourceService.createResource(body));
 
         return new ResponseEntity<>(newId, HttpStatus.OK);
     }

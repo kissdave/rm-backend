@@ -1,6 +1,8 @@
 package hu.bme.simonyi.dave.rmbackend.controller;
 
 import hu.bme.simonyi.dave.rmbackend.model.ResourceType;
+import hu.bme.simonyi.dave.rmbackend.repository.ResourceTypeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,9 +15,11 @@ import java.util.List;
 @Controller
 public class ResourcetypesApiController implements ResourcetypesApi {
 
+    @Autowired
+    ResourceTypeRepository resourceTypeRepository;
+
     public ResponseEntity<List<ResourceType>> resourcetypesGet() {
-        // do some magic!
-        return new ResponseEntity<List<ResourceType>>(HttpStatus.OK);
+        return new ResponseEntity<List<ResourceType>>(resourceTypeRepository.findAll(), HttpStatus.OK);
     }
 
 }

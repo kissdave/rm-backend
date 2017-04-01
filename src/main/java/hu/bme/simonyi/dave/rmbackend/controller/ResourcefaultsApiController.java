@@ -1,6 +1,8 @@
 package hu.bme.simonyi.dave.rmbackend.controller;
 
 import hu.bme.simonyi.dave.rmbackend.model.ResourceFault;
+import hu.bme.simonyi.dave.rmbackend.repository.ResourceFaultRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,9 +15,10 @@ import java.util.List;
 @Controller
 public class ResourcefaultsApiController implements ResourcefaultsApi {
 
-    public ResponseEntity<List<ResourceFault>> resourcefaultsGet() {
-        // do some magic!
-        return new ResponseEntity<List<ResourceFault>>(HttpStatus.OK);
-    }
+    @Autowired
+    ResourceFaultRepository resourceFaultRepository;
 
+    public ResponseEntity<List<ResourceFault>> resourcefaultsGet() {
+        return new ResponseEntity<List<ResourceFault>>(resourceFaultRepository.findAll(), HttpStatus.OK);
+    }
 }

@@ -1,10 +1,12 @@
 package hu.bme.simonyi.dave.rmbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,6 +38,7 @@ public class Resource implements Serializable {
     private ResourceType resourceType = null;
 
     @OneToMany(mappedBy = "resource", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JsonManagedReference
     @JsonProperty("resourceFaults")
     private List<ResourceFault> resourceFaults = null;
 
@@ -258,6 +261,15 @@ public class Resource implements Serializable {
             return "null";
         }
         return o.toString().replace("\n", "\n    ");
+    }
+
+    public void addResourceFault(ResourceFault resourceFault) {
+        if(resourceFaults == null) {
+            resourceFaults = new ArrayList<>();
+        }
+
+        resourceFaults.add(resourceFault);
+        resourceFault.setResource(this);
     }
 }
 
