@@ -1,7 +1,6 @@
 package hu.bme.simonyi.dave.rmbackend.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
@@ -15,6 +14,7 @@ import java.util.Objects;
  */
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "resourceID")
 public class Resource implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,6 +33,7 @@ public class Resource implements Serializable {
     @JsonProperty("archived")
     private Boolean archived = null;
 
+    @JsonIgnore
     @ManyToOne
     @JsonProperty("resourceType")
     private ResourceType resourceType = null;

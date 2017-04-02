@@ -68,8 +68,12 @@ public class ResourceService {
                 ResourceType resourceTypeOld = resourceOld.getResourceType();
                 final ResourceType resourceTypeNew = resourceTypeRepository.findOne(body.getResourceType().getResourceTypeID());
 
-                resourceTypeOld.deleteResource(resourceOld);
-                resourceTypeNew.addResource(body);
+                if(resourceTypeOld != null) {
+                    resourceTypeOld.deleteResource(resourceOld);
+                }
+                if(resourceTypeNew != null) {
+                    resourceTypeNew.addResource(body);
+                }
             }
             if(body.getArchived()) {
                 body.setActive(false);

@@ -1,6 +1,6 @@
 package hu.bme.simonyi.dave.rmbackend.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
@@ -13,6 +13,7 @@ import java.util.Objects;
  * Created by dkiss on 2017. 03. 28..
  */
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "resourceTypeID")
 public class ResourceType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
