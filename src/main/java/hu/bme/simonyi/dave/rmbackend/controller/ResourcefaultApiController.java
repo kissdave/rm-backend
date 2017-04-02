@@ -36,7 +36,7 @@ public class ResourcefaultApiController implements ResourcefaultApi {
         if(resourceFault == null) {
             returnStatus = HttpStatus.NOT_FOUND;
         }
-        return new ResponseEntity<ResourceFault>(resourceFault, HttpStatus.OK);
+        return new ResponseEntity<ResourceFault>(resourceFault, returnStatus);
     }
 
     public ResponseEntity<Integer> resourcefaultResourcefaultIDPut(@ApiParam(value = "The identifier of the resource fault to modify",required=true ) @PathVariable("resourcefaultID") Integer resourcefaultID,
