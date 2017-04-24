@@ -195,8 +195,24 @@ public class Resource implements Serializable {
     }
 
     public Resource addRequestsItem(Request requestsItem) {
+        if(requests == null) {
+            this.requests = new ArrayList<>();
+        }
+
         this.requests.add(requestsItem);
+        requestsItem.setResource(this);
         return this;
+    }
+
+    public Resource deleteRequestItem(Request requestsItem) {
+        if(requests == null) {
+            this.requests = new ArrayList<>();
+            return null;
+        }
+        this.requests.remove(requestsItem);
+        requestsItem.setResource(null);
+        return this;
+
     }
 
     /**
