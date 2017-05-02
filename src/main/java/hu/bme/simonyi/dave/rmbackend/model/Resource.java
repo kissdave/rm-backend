@@ -39,7 +39,6 @@ public class Resource implements Serializable {
     private ResourceType resourceType = null;
 
     @OneToMany(mappedBy = "resource", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JsonManagedReference
     @JsonProperty("resourceFaults")
     private List<ResourceFault> resourceFaults = null;
 

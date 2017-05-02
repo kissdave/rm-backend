@@ -13,7 +13,6 @@ import java.util.Objects;
  * Created by dkiss on 2017. 03. 28..
  */
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "resourceTypeID")
 public class ResourceType implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,6 +26,7 @@ public class ResourceType implements Serializable {
     private String description = null;
 
     @OneToMany(mappedBy = "resourceType", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JsonIgnore
     @JsonProperty("resources")
     private List<Resource> resources = null;
 
@@ -107,6 +107,7 @@ public class ResourceType implements Serializable {
      * @return resources
      **/
     @ApiModelProperty(value = "")
+    @JsonIgnore
     public List<Resource> getResources() {
         return resources;
     }
