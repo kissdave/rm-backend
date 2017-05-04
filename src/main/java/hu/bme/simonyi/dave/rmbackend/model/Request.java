@@ -64,6 +64,9 @@ public class Request {
     @ManyToOne
     private User user = null;
 
+    public Request() {
+    }
+
     public Request requestID(Long requestID) {
         this.requestID = requestID;
         return this;

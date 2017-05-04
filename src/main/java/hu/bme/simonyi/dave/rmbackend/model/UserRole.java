@@ -29,6 +29,9 @@ public class UserRole {
     @OneToMany(mappedBy = "userRole", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<User> users = null;
 
+    public UserRole() {
+    }
+
     public UserRole userRoleID(Long userRoleID) {
         this.userRoleID = userRoleID;
         return this;

@@ -46,6 +46,10 @@ public class Resource implements Serializable {
     @JsonProperty("requests")
     private List<Request> requests = null;
 
+    @OneToMany(mappedBy = "resource", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JsonProperty("loans")
+    private List<Loan> loans = null;
+
     public Resource() {
         // Empty constructor for JPA
     }
@@ -228,6 +232,25 @@ public class Resource implements Serializable {
         this.requests = requests;
     }
 
+
+    public List<Loan> getLoans() {
+        if(this.loans == null) {
+            loans = new ArrayList<>();
+        }
+        return loans;
+    }
+
+    public void setLoans(List<Loan> loans) {
+        this.loans = loans;
+    }
+
+    public void addLoanItem(Loan loanItem) {
+        if(this.loans == null) {
+            loans = new ArrayList<>();
+        }
+        loans.add(loanItem);
+        loanItem.setResource(this);
+    }
 
     @Override
     public boolean equals(java.lang.Object o) {

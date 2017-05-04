@@ -31,6 +31,9 @@ public class Card {
     @ManyToOne
     private User user = null;
 
+    public Card() {
+    }
+
     public Card cardID(Long cardID) {
         this.cardID = cardID;
         return this;
@@ -88,6 +91,14 @@ public class Card {
         this.cardDescription = cardDescription;
     }
 
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public boolean equals(Object o) {

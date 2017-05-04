@@ -46,6 +46,25 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<Card> cards = null;
 
+    @JsonProperty("adminOfIssue")
+    @OneToMany(mappedBy = "adminOfIssue", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    private List<Loan> adminOfIssue = null;
+
+    @JsonProperty("clientOfIssue")
+    @OneToMany(mappedBy = "clientOfIssue", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    private List<Loan> clientOfIssue = null;
+
+    @JsonProperty("adminOfWithdraw")
+    @OneToMany(mappedBy = "adminOfWithdraw", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    private List<Loan> adminOfWithdraw = null;
+
+    @JsonProperty("clientOfWithdraw")
+    @OneToMany(mappedBy = "clientOfWithdraw", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    private List<Loan> clientOfWithdraw = null;
+
+    public User() {
+    }
+
     public User userID(Long userID) {
         this.userID = userID;
         return this;
@@ -184,12 +203,29 @@ public class User {
 
 
     public User cards(List<Card> cards) {
+        if(this.cards == null) {
+            this.cards = new ArrayList<>();
+        }
         this.cards = cards;
         return this;
     }
 
     public User addCardsItem(Card cardsItem) {
+        if(this.cards == null) {
+            this.cards = new ArrayList<>();
+        }
         this.cards.add(cardsItem);
+        cardsItem.setUser(this);
+        return this;
+    }
+
+    public User removeCardsItem(Card cardsItem) {
+        if(this.cards == null) {
+            this.cards = new ArrayList<>();
+            return this;
+        }
+        this.cards.remove(cardsItem);
+        cardsItem.setUser(null);
         return this;
     }
 
@@ -200,6 +236,9 @@ public class User {
      **/
     @ApiModelProperty(value = "")
     public List<Card> getCards() {
+        if(this.cards == null) {
+            this.cards = new ArrayList<>();
+        }
         return cards;
     }
 
@@ -215,6 +254,185 @@ public class User {
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
     }
+
+    public User adminOfIssue(List<Loan> adminOfIssue) {
+        this.adminOfIssue = adminOfIssue;
+        return this;
+    }
+
+    public User addAdminOfIssueItem(Loan adminOfIssueItem) {
+        if(this.adminOfIssue == null) {
+            this.adminOfIssue = new ArrayList<>();
+        }
+        this.adminOfIssue.add(adminOfIssueItem);
+        adminOfIssueItem.setAdminOfIssue(this);
+        return this;
+    }
+
+    public User removeAdminOfIssueItem(Loan adminOfIssueItem) {
+        if(this.adminOfIssue == null) {
+            this.adminOfIssue = new ArrayList<>();
+            return this;
+        }
+        this.adminOfIssue.remove(adminOfIssueItem);
+        adminOfIssueItem.setAdminOfIssue(null);
+        return this;
+    }
+
+    /**
+     * Get adminOfIssue
+     * @return adminOfIssue
+     **/
+    @ApiModelProperty(value = "")
+    public List<Loan> getAdminOfIssue() {
+        if(this.adminOfIssue == null) {
+            this.adminOfIssue = new ArrayList<>();
+        }
+        return adminOfIssue;
+    }
+
+    public void setAdminOfIssue(List<Loan> adminOfIssue) {
+        if(this.adminOfIssue == null) {
+            this.adminOfIssue = new ArrayList<>();
+        }
+        this.adminOfIssue = adminOfIssue;
+    }
+
+    public User clientOfIssue(List<Loan> clientOfIssue) {
+        if(this.clientOfIssue == null) {
+            this.clientOfIssue = new ArrayList<>();
+        }
+        this.clientOfIssue = clientOfIssue;
+        return this;
+    }
+
+    public User addClientOfIssueItem(Loan clientOfIssueItem) {
+        if(this.clientOfIssue == null) {
+            this.clientOfIssue = new ArrayList<>();
+        }
+        this.clientOfIssue.add(clientOfIssueItem);
+        clientOfIssueItem.setClientOfIssue(this);
+        return this;
+    }
+
+    public User removeClientOfIssueItem(Loan clientOfIssueItem) {
+        if(this.clientOfIssue == null) {
+            this.clientOfIssue = new ArrayList<>();
+            return this;
+        }
+        this.clientOfIssue.remove(clientOfIssueItem);
+        clientOfIssueItem.setClientOfIssue(null);
+        return this;
+    }
+
+    /**
+     * Get clientOfIssue
+     * @return clientOfIssue
+     **/
+    @ApiModelProperty(value = "")
+    public List<Loan> getClientOfIssue() {
+        if(this.clientOfIssue == null) {
+            this.clientOfIssue = new ArrayList<>();
+        }
+        return clientOfIssue;
+    }
+
+    public void setClientOfIssue(List<Loan> clientOfIssue) {
+        if(this.clientOfIssue == null) {
+            this.clientOfIssue = new ArrayList<>();
+        }
+        this.clientOfIssue = clientOfIssue;
+    }
+
+    public User adminOfWithdraw(List<Loan> adminOfWithdraw) {
+        if(this.adminOfWithdraw == null) {
+            this.adminOfWithdraw = new ArrayList<>();
+        }
+        this.adminOfWithdraw = adminOfWithdraw;
+        return this;
+    }
+
+    public User addAdminOfWithdrawItem(Loan adminOfWithdrawItem) {
+        if(this.adminOfWithdraw == null) {
+            this.adminOfWithdraw = new ArrayList<>();
+        }
+        this.adminOfWithdraw.add(adminOfWithdrawItem);
+        adminOfWithdrawItem.setAdminOfWithdraw(this);
+        return this;
+    }
+
+    public User removeAdminOfWithdrawItem(Loan adminOfWithdrawItem) {
+        if(this.adminOfWithdraw == null) {
+            this.adminOfWithdraw = new ArrayList<>();
+            return this;
+        }
+        this.adminOfWithdraw.remove(adminOfWithdrawItem);
+        adminOfWithdrawItem.setAdminOfWithdraw(null);
+        return this;
+    }
+
+    /**
+     * Get adminOfWithdraw
+     * @return adminOfWithdraw
+     **/
+    @ApiModelProperty(value = "")
+    public List<Loan> getAdminOfWithdraw() {
+        if(this.adminOfWithdraw == null) {
+            this.adminOfWithdraw = new ArrayList<>();
+        }
+        return adminOfWithdraw;
+    }
+
+    public void setAdminOfWithdraw(List<Loan> adminOfWithdraw) {
+        if(this.adminOfWithdraw == null) {
+            this.adminOfWithdraw = new ArrayList<>();
+        }
+        this.adminOfWithdraw = adminOfWithdraw;
+    }
+
+    public User clientOfWithdraw(List<Loan> clientOfWithdraw) {
+        if(this.clientOfWithdraw == null) {
+            this.clientOfWithdraw = new ArrayList<>();
+        }
+        this.clientOfWithdraw = clientOfWithdraw;
+        return this;
+    }
+
+    public User addClientOfWithdrawItem(Loan clientOfWithdrawItem) {
+        if(this.clientOfWithdraw == null) {
+            this.clientOfWithdraw = new ArrayList<>();
+        }
+        this.clientOfWithdraw.add(clientOfWithdrawItem);
+        clientOfWithdrawItem.setClientOfWithdraw(this);
+        return this;
+    }
+
+    public User removeClientOfWithdrawItem(Loan clientOfWithdrawItem) {
+        if(this.clientOfWithdraw == null) {
+            this.clientOfWithdraw = new ArrayList<>();
+            return this;
+        }
+        this.clientOfWithdraw.remove(clientOfWithdrawItem);
+        clientOfWithdrawItem.setClientOfWithdraw(null);
+        return this;
+    }
+
+    /**
+     * Get clientOfWithdraw
+     * @return clientOfWithdraw
+     **/
+    @ApiModelProperty(value = "")
+    public List<Loan> getClientOfWithdraw() {
+        if(this.clientOfWithdraw == null) {
+            this.clientOfWithdraw = new ArrayList<>();
+        }
+        return clientOfWithdraw;
+    }
+
+    public void setClientOfWithdraw(List<Loan> clientOfWithdraw) {
+        this.clientOfWithdraw = clientOfWithdraw;
+    }
+
 
     @Override
     public boolean equals(Object o) {

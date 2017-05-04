@@ -32,6 +32,9 @@ public class RequestStatus {
     @OneToMany(mappedBy = "requestStatus", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<Request> requests = null;
 
+    public RequestStatus() {
+    }
+
     public RequestStatus requestStatusID(Long requestStatusID) {
         this.requestStatusID = requestStatusID;
         return this;
