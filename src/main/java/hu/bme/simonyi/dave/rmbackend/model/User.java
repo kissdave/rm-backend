@@ -63,6 +63,7 @@ public class User {
     private List<Loan> clientOfWithdraw = null;
 
     public User() {
+        // Default constructor for JPA
     }
 
     public User userID(Long userID) {

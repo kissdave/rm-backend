@@ -1,19 +1,16 @@
 package hu.bme.simonyi.dave.rmbackend.model;
 
-import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.*;
-import hu.bme.simonyi.dave.rmbackend.model.User;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Loan
  */
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-05-03T09:13:05.654Z")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "cardID")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-05-05T06:41:06.636Z")
 @Entity
 public class Loan {
     @Id
@@ -30,41 +27,8 @@ public class Loan {
     @JsonProperty("dateOfReturn")
     private DateTime dateOfReturn = null;
 
-    /**
-     * Gets or Sets loanStatus
-     */
-    public enum LoanStatusEnum {
-        ACTIVE("ACTIVE"),
-
-        CLOSED("CLOSED"),
-
-        MISSING("MISSING");
-
-        private String value;
-
-        LoanStatusEnum(String value) {
-            this.value = value;
-        }
-
-        @Override
-        @JsonValue
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        @JsonCreator
-        public static LoanStatusEnum fromValue(String text) {
-            for (LoanStatusEnum b : LoanStatusEnum.values()) {
-                if (String.valueOf(b.value).equals(text)) {
-                    return b;
-                }
-            }
-            return null;
-        }
-    }
-
-    @JsonProperty("loanStatus")
-    private LoanStatusEnum loanStatus = LoanStatusEnum.ACTIVE;
+    @JsonProperty("active")
+    private Boolean active = null;
 
     @ManyToOne
     @JsonProperty("resource")
@@ -87,6 +51,7 @@ public class Loan {
     private User clientOfWithdraw = null;
 
     public Loan() {
+        // Default constructor for JPA
     }
 
     public Loan loanID(Long loanID) {
@@ -165,23 +130,42 @@ public class Loan {
         this.dateOfReturn = dateOfReturn;
     }
 
-    public Loan loanStatus(LoanStatusEnum loanStatus) {
-        this.loanStatus = loanStatus;
+    public Loan active(Boolean active) {
+        this.active = active;
         return this;
     }
 
     /**
-     * Get loanStatus
+     * Get active
      *
-     * @return loanStatus
+     * @return active
      **/
     @ApiModelProperty(value = "")
-    public LoanStatusEnum getLoanStatus() {
-        return loanStatus;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setLoanStatus(LoanStatusEnum loanStatus) {
-        this.loanStatus = loanStatus;
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Loan resource(Resource resource) {
+        this.resource = resource;
+        return this;
+    }
+
+    /**
+     * Get resource
+     *
+     * @return resource
+     **/
+    @ApiModelProperty(value = "")
+    public Resource getResource() {
+        return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 
     public Loan adminOfIssue(User adminOfIssue) {
@@ -261,14 +245,6 @@ public class Loan {
     }
 
 
-    public Resource getResource() {
-        return resource;
-    }
-
-    public void setResource(Resource resource) {
-        this.resource = resource;
-    }
-
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -282,7 +258,8 @@ public class Loan {
                 Objects.equals(this.dateOfLoan, loan.dateOfLoan) &&
                 Objects.equals(this.expectedReturn, loan.expectedReturn) &&
                 Objects.equals(this.dateOfReturn, loan.dateOfReturn) &&
-                Objects.equals(this.loanStatus, loan.loanStatus) &&
+                Objects.equals(this.active, loan.active) &&
+                Objects.equals(this.resource, loan.resource) &&
                 Objects.equals(this.adminOfIssue, loan.adminOfIssue) &&
                 Objects.equals(this.clientOfIssue, loan.clientOfIssue) &&
                 Objects.equals(this.adminOfWithdraw, loan.adminOfWithdraw) &&
@@ -291,7 +268,7 @@ public class Loan {
 
     @Override
     public int hashCode() {
-        return Objects.hash(loanID, dateOfLoan, expectedReturn, dateOfReturn, loanStatus, adminOfIssue, clientOfIssue, adminOfWithdraw, clientOfWithdraw);
+        return Objects.hash(loanID, dateOfLoan, expectedReturn, dateOfReturn, active, resource, adminOfIssue, clientOfIssue, adminOfWithdraw, clientOfWithdraw);
     }
 
     @Override
@@ -303,7 +280,8 @@ public class Loan {
         sb.append("    dateOfLoan: ").append(toIndentedString(dateOfLoan)).append("\n");
         sb.append("    expectedReturn: ").append(toIndentedString(expectedReturn)).append("\n");
         sb.append("    dateOfReturn: ").append(toIndentedString(dateOfReturn)).append("\n");
-        sb.append("    loanStatus: ").append(toIndentedString(loanStatus)).append("\n");
+        sb.append("    active: ").append(toIndentedString(active)).append("\n");
+        sb.append("    resource: ").append(toIndentedString(resource)).append("\n");
         sb.append("    adminOfIssue: ").append(toIndentedString(adminOfIssue)).append("\n");
         sb.append("    clientOfIssue: ").append(toIndentedString(clientOfIssue)).append("\n");
         sb.append("    adminOfWithdraw: ").append(toIndentedString(adminOfWithdraw)).append("\n");

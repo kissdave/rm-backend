@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-05-03T09:13:05.654Z")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-05-05T06:41:06.636Z")
 
 @Api(value = "card", description = "the card API")
 public interface CardApi {
@@ -62,7 +62,7 @@ public interface CardApi {
         @ApiResponse(code = 200, message = "Successful operation", response = Integer.class) })
     @RequestMapping(value = "/card",
         produces = { "application/json" }, 
-        consumes = { "application/xml" },
+        consumes = { "application/json" },
         method = RequestMethod.POST)
     ResponseEntity<Integer> cardPost(@ApiParam(value = "" ,required=true ) @RequestBody Card body);
 
