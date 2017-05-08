@@ -27,7 +27,6 @@ public class ResourceType implements Serializable {
 
     @OneToMany(mappedBy = "resourceType", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JsonIgnore
-    @JsonProperty("resources")
     private List<Resource> resources = null;
 
     public ResourceType() {

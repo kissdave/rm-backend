@@ -1,8 +1,6 @@
 package hu.bme.simonyi.dave.rmbackend.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
@@ -14,7 +12,7 @@ import java.util.Objects;
  * User
  */
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-04-09T21:23:32.762Z")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userID")
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "userID")
 @Entity
 public class User {
     @Id
@@ -42,24 +40,24 @@ public class User {
     @ManyToOne
     private UserRole userRole = null;
 
-    @JsonProperty("cards")
     @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Card> cards = null;
 
-    @JsonProperty("adminOfIssue")
     @OneToMany(mappedBy = "adminOfIssue", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Loan> adminOfIssue = null;
 
-    @JsonProperty("clientOfIssue")
     @OneToMany(mappedBy = "clientOfIssue", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Loan> clientOfIssue = null;
 
-    @JsonProperty("adminOfWithdraw")
     @OneToMany(mappedBy = "adminOfWithdraw", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Loan> adminOfWithdraw = null;
 
-    @JsonProperty("clientOfWithdraw")
     @OneToMany(mappedBy = "clientOfWithdraw", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Loan> clientOfWithdraw = null;
 
     public User() {

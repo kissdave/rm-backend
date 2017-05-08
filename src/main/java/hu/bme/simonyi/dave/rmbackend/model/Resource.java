@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "resourceID")
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "resourceID")
 public class Resource implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,21 +33,20 @@ public class Resource implements Serializable {
     @JsonProperty("archived")
     private Boolean archived = null;
 
-    @JsonIgnore
     @ManyToOne
     @JsonProperty("resourceType")
     private ResourceType resourceType = null;
 
     @OneToMany(mappedBy = "resource", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JsonProperty("resourceFaults")
+    @JsonIgnore
     private List<ResourceFault> resourceFaults = null;
 
     @OneToMany(mappedBy = "resource", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JsonProperty("requests")
+    @JsonIgnore
     private List<Request> requests = null;
 
     @OneToMany(mappedBy = "resource", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
-    @JsonProperty("loans")
+    @JsonIgnore
     private List<Loan> loans = null;
 
     public Resource() {
