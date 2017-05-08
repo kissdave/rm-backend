@@ -57,7 +57,7 @@ public class LoanApiController implements LoanApi {
 
     public ResponseEntity<Integer> loanPost(@ApiParam(value = "" ,required=true ) @RequestBody Loan body) {
         Integer newId = loanService.createLoan(body);
-        return new ResponseEntity<Integer>(HttpStatus.OK);
+        return new ResponseEntity<Integer>(newId, HttpStatus.OK);
     }
 
 }

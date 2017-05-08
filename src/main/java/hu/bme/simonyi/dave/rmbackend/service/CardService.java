@@ -58,6 +58,7 @@ public class CardService {
     }
 
     public User getUserByCard(String cardNum) {
+        System.out.println("The card number is: " + cardNum);
         if(cardNum != null) {
             final List<Card> cards = cardRepository.findAll();
             for(Card c : cards) {

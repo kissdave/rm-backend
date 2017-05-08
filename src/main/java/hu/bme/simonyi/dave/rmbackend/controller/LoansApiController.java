@@ -1,8 +1,10 @@
 package hu.bme.simonyi.dave.rmbackend.controller;
 
 import hu.bme.simonyi.dave.rmbackend.model.Loan;
+import hu.bme.simonyi.dave.rmbackend.repository.LoanRepository;
 import io.swagger.annotations.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,9 +23,11 @@ import java.util.List;
 @Controller
 public class LoansApiController implements LoansApi {
 
+    @Autowired
+    LoanRepository loanRepository;
+
     public ResponseEntity<List<Loan>> loansGet() {
-        // do some magic!
-        return new ResponseEntity<List<Loan>>(HttpStatus.OK);
+        return new ResponseEntity<List<Loan>>(loanRepository.findAll(), HttpStatus.OK);
     }
 
 }
