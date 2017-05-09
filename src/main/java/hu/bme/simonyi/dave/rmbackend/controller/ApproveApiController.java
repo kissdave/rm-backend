@@ -20,14 +20,14 @@ public class ApproveApiController implements ApproveApi {
     @Autowired
     RequestService requestService;
 
-    public ResponseEntity<Void> approveRequestIDPost(@ApiParam(value = "The identifier of the request to approve or decline",required=true ) @PathVariable("requestID") Integer requestID,
+    public ResponseEntity<Integer> approveRequestIDPost(@ApiParam(value = "The identifier of the request to approve or decline",required=true ) @PathVariable("requestID") Integer requestID,
                                                      @ApiParam(value = "The state of approvement" ,required=true ) @RequestBody Boolean isApproved) {
         HttpStatus returnStatus = HttpStatus.OK;
         Request request = requestService.approveRequest(requestID, isApproved);
         if(request == null) {
             returnStatus = HttpStatus.NOT_FOUND;
         }
-        return new ResponseEntity<Void>(HttpStatus.OK);
+        return new ResponseEntity<>(request.getRequestID().intValue(), returnStatus);
     }
 
 }

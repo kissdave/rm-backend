@@ -1,6 +1,7 @@
 package hu.bme.simonyi.dave.rmbackend.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import io.swagger.annotations.ApiModelProperty;
@@ -14,7 +15,7 @@ import java.util.Objects;
  * RequestStatus
  */
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-04-09T21:23:32.762Z")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "requestStatusID")
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "requestStatusID")
 @Entity
 public class RequestStatus {
     @Id
@@ -28,8 +29,8 @@ public class RequestStatus {
     @JsonProperty("description")
     private String description = null;
 
-    @JsonProperty("requests")
     @OneToMany(mappedBy = "requestStatus", cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Request> requests = null;
 
     public RequestStatus() {

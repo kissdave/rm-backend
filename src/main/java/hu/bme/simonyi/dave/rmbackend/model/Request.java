@@ -14,7 +14,7 @@ import java.util.Objects;
  * Request
  */
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.SpringCodegen", date = "2017-04-09T21:23:32.762Z")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "requestID")
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "requestID")
 @Entity
 public class Request {
 
@@ -30,22 +30,22 @@ public class Request {
     private String eventDescription = null;
 
     @JsonProperty("dateFrom")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime dateFrom = null;
 
     @JsonProperty("dateTo")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime dateTo = null;
 
     @JsonProperty("handleBefore")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime handleBefore = null;
 
     @JsonProperty("handleAfter")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime handleAfter = null;
 
